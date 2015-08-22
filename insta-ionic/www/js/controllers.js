@@ -41,15 +41,17 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+.controller('ImageListCtrl', function($scope) {
+  $scope.feed = new Instafeed({
+      get: 'tagged',
+      tagName: 'nofilter',
+      clientId: 'YOUR_CLIENT_ID',
+      template: '<ion-item><div class="list card"><div class="item item-avatar"><img src="{{model.user.profile_picture}}"><h2>{{model.user.full_name}}</h2><p>{{model.user.username}}</p></div><div class="item item-image"><img src={{model.images.standard_resolution.url}} /></div></div></ion-item>',
+      target: 'nacho'
+  });
+  //debugger;
+  //window.feed = $scope.feed;
+  $scope.images = $scope.feed.run();
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
